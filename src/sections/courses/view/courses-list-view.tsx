@@ -4,12 +4,9 @@ import type { TableHeadCellProps } from 'src/components/table';
 import type { ICourseItem, ICourseTableFilters } from 'src/types/courses';
 
 import { useState, useCallback } from 'react';
-import { varAlpha } from 'minimal-shared/utils';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
@@ -18,11 +15,9 @@ import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 
 import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 
 import { DashboardContent } from 'src/layouts/dashboard';
 
-import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
@@ -42,12 +37,12 @@ import {
 
 import { CourseTableRow } from '../course-table-row';
 import { CourseTableToolbar } from '../course-table-toolbar';
-import { CourseTableFiltersResult } from '../course-table-filters-result';
 import { CourseQuickEditForm } from '../course-edit-new-form';
+import { CourseTableFiltersResult } from '../course-table-filters-result';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'الكل' }];
+// const STATUS_OPTIONS = [{ value: 'all', label: 'الكل' }];
 
 const TABLE_HEAD: TableHeadCellProps[] = [
   { id: 'name', label: 'الاسم' },
@@ -81,7 +76,7 @@ export function CoursesListView() {
   ]);
 
   const filters = useSetState<ICourseTableFilters>({ name: '', teacher: '' });
-  const { state: currentFilters, setState: updateFilters } = filters;
+  const { state: currentFilters } = filters;
 
   const dataFiltered = applyFilter({
     inputData: tableData,
@@ -118,13 +113,13 @@ export function CoursesListView() {
     table.onUpdatePageDeleteRows(dataInPage.length, dataFiltered.length);
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
-  const handleFilterTeacher = useCallback(
-    (event: React.SyntheticEvent, newValue: string) => {
-      table.onResetPage();
-      updateFilters({ teacher: newValue });
-    },
-    [updateFilters, table]
-  );
+  // const handleFilterTeacher = useCallback(
+  //   (event: React.SyntheticEvent, newValue: string) => {
+  //     table.onResetPage();
+  //     updateFilters({ teacher: newValue });
+  //   },
+  //   [updateFilters, table]
+  // );
 
   const renderConfirmDialog = () => (
     <ConfirmDialog

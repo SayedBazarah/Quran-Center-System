@@ -1,16 +1,12 @@
+import type { ICourseTableFilters } from 'src/types/courses';
 import type { UseSetStateReturn } from 'minimal-shared/hooks';
+import type { FiltersResultProps } from 'src/components/filters-result';
 
 import { useCallback } from 'react';
 
 import Chip from '@mui/material/Chip';
 
-import {
-  chipProps,
-  FiltersBlock,
-  FiltersResult,
-  FiltersResultProps,
-} from 'src/components/filters-result';
-import { ICourseTableFilters } from 'src/types/courses';
+import { chipProps, FiltersBlock, FiltersResult } from 'src/components/filters-result';
 
 // ----------------------------------------------------------------------
 
@@ -31,14 +27,6 @@ export function CourseTableFiltersResult({ filters, onResetPage, totalResults, s
     onResetPage();
     updateFilters({ teacher: 'all' });
   }, [onResetPage, updateFilters]);
-
-  const handleRemoveRole = useCallback(
-    (inputValue: string) => {
-      onResetPage();
-      updateFilters({ teacher: '' });
-    },
-    [onResetPage, updateFilters, currentFilters.teacher]
-  );
 
   const handleReset = useCallback(() => {
     onResetPage();

@@ -2,16 +2,16 @@
 
 import type { LinkProps } from '@mui/material/Link';
 
-import { useId } from 'react';
 import { mergeClasses } from 'minimal-shared/utils';
 
 import Link from '@mui/material/Link';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import { RouterLink } from 'src/routes/components';
 
-import { logoClasses } from './classes';
 import { CONFIG } from 'src/global-config';
+
+import { logoClasses } from './classes';
 
 // ----------------------------------------------------------------------
 
@@ -28,15 +28,6 @@ export function Logo({
   isSingle = true,
   ...other
 }: LogoProps) {
-  const theme = useTheme();
-
-  const gradientId = useId();
-
-  const TEXT_PRIMARY = theme.vars.palette.text.primary;
-  const PRIMARY_LIGHT = theme.vars.palette.primary.light;
-  const PRIMARY_MAIN = theme.vars.palette.primary.main;
-  const PRIMARY_DARKER = theme.vars.palette.primary.dark;
-
   const singleLogo = (
     <img
       alt="Single logo"

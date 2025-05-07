@@ -1,5 +1,6 @@
-import { GuestGuard } from 'src/auth/guard';
 import { AuthCenteredLayout } from 'src/layouts/auth-centered';
+
+import { GuestGuard } from 'src/auth/guard';
 
 // ----------------------------------------------------------------------
 

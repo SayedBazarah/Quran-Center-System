@@ -14,21 +14,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { useColorScheme } from '@mui/material/styles';
 
-import { themeConfig } from 'src/theme/theme-config';
-import { primaryColorPresets } from 'src/theme/with-settings';
-
 import { settingIcons } from './icons';
 import { Iconify } from '../../iconify';
 import { BaseOption } from './base-option';
 import { Scrollbar } from '../../scrollbar';
 import { SmallBlock, LargeBlock } from './styles';
-import { PresetsOptions } from './presets-options';
 import { FullScreenButton } from './fullscreen-button';
-import { FontSizeOptions, FontFamilyOptions } from './font-options';
+import { NavLayoutOptions } from './nav-layout-option';
 import { useSettingsContext } from '../context/use-settings-context';
-import { NavColorOptions, NavLayoutOptions } from './nav-layout-option';
 
-import type { SettingsState, SettingsDrawerProps } from '../types';
+import type { SettingsDrawerProps } from '../types';
 
 // ----------------------------------------------------------------------
 
@@ -45,15 +40,11 @@ export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
   }, [mode, systemMode]);
 
   // Visible options by default settings
-  const isFontFamilyVisible = hasKeys(defaultSettings, ['fontFamily']);
   const isCompactLayoutVisible = hasKeys(defaultSettings, ['compactLayout']);
-  const isDirectionVisible = hasKeys(defaultSettings, ['direction']);
   const isColorSchemeVisible = hasKeys(defaultSettings, ['colorScheme']);
   const isContrastVisible = hasKeys(defaultSettings, ['contrast']);
   const isNavColorVisible = hasKeys(defaultSettings, ['navColor']);
   const isNavLayoutVisible = hasKeys(defaultSettings, ['navLayout']);
-  const isPrimaryColorVisible = hasKeys(defaultSettings, ['primaryColor']);
-  const isFontSizeVisible = hasKeys(defaultSettings, ['fontSize']);
 
   const handleReset = useCallback(() => {
     settings.onReset();
@@ -117,17 +108,6 @@ export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
     />
   );
 
-  const renderRtl = () => (
-    <BaseOption
-      label="Right to left"
-      selected={settings.state.direction === 'rtl'}
-      icon={<SvgIcon>{settingIcons.alignRight}</SvgIcon>}
-      onChangeOption={() =>
-        settings.setState({ direction: settings.state.direction === 'ltr' ? 'rtl' : 'ltr' })
-      }
-    />
-  );
-
   const renderCompact = () => (
     <BaseOption
       tooltip="تكبير الشاشة"
@@ -136,26 +116,6 @@ export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
       icon={<SvgIcon>{settingIcons.autofitWidth}</SvgIcon>}
       onChangeOption={() => settings.setState({ compactLayout: !settings.state.compactLayout })}
     />
-  );
-
-  const renderPresets = () => (
-    <LargeBlock
-      title="Presets"
-      canReset={settings.state.primaryColor !== defaultSettings.primaryColor}
-      onReset={() => settings.setState({ primaryColor: defaultSettings.primaryColor })}
-    >
-      <PresetsOptions
-        icon={<SvgIcon sx={{ width: 28, height: 28 }}>{settingIcons.siderbarDuotone}</SvgIcon>}
-        options={
-          Object.keys(primaryColorPresets).map((key) => ({
-            name: key,
-            value: primaryColorPresets[key].main,
-          })) as { name: SettingsState['primaryColor']; value: string }[]
-        }
-        value={settings.state.primaryColor}
-        onChangeOption={(newOption) => settings.setState({ primaryColor: newOption })}
-      />
-    </LargeBlock>
   );
 
   const renderNav = () => (

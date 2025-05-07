@@ -1,4 +1,3 @@
-import { CONFIG } from 'src/global-config';
 
 import type { WorkspacesPopoverProps } from './components/workspaces-popover';
 
