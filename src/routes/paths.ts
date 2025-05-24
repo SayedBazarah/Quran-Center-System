@@ -48,12 +48,18 @@ export const paths = {
       new: `${ROOTS.DASHBOARD}/courses/new`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/courses/${id}`,
     },
-    two: `${ROOTS.DASHBOARD}/two`,
-    three: `${ROOTS.DASHBOARD}/three`,
+    students: `${ROOTS.DASHBOARD}/students`,
+    teachers: `${ROOTS.DASHBOARD}/teachers`,
     group: {
       root: `${ROOTS.DASHBOARD}/group`,
       five: `${ROOTS.DASHBOARD}/group/five`,
       six: `${ROOTS.DASHBOARD}/group/six`,
+    },
+    settings: {
+      root: `${ROOTS.DASHBOARD}/settings`,
+      roles: `${ROOTS.DASHBOARD}/settings/roles`,
+      users: `${ROOTS.DASHBOARD}/settings/users`,
+      changePassword: `${ROOTS.DASHBOARD}/settings/change-password`,
     },
   },
 };

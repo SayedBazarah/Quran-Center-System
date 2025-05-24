@@ -1,8 +1,9 @@
-import type { ICourseItem } from 'src/types/courses';
+import type { ITeacherItem } from 'src/types/teacher';
 
 import { useBoolean, usePopover } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
@@ -19,28 +20,29 @@ import { Iconify } from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { CustomPopover } from 'src/components/custom-popover';
 
-import { CourseQuickEditForm } from './course-edit-new-form';
+import { TeacherQuickEditForm } from './teacher-edit-new-form';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  row: ICourseItem;
+  row: ITeacherItem;
   selected: boolean;
   editHref: string;
   onSelectRow: () => void;
   onDeleteRow: () => void;
 };
 
-export function CourseTableRow({ row, selected, editHref, onSelectRow, onDeleteRow }: Props) {
+export function TeacherTableRow({ row, selected, editHref, onSelectRow, onDeleteRow }: Props) {
   const menuActions = usePopover();
   const confirmDialog = useBoolean();
   const quickEditForm = useBoolean();
 
   const renderQuickEditForm = () => (
-    <CourseQuickEditForm
-      currentCourse={row}
+    <TeacherQuickEditForm
+      currentTeacher={row}
       open={quickEditForm.value}
       onClose={quickEditForm.onFalse}
+      isNew={false}
     />
   );
 
@@ -102,22 +104,24 @@ export function CourseTableRow({ row, selected, editHref, onSelectRow, onDeleteR
             }}
           />
         </TableCell>
-
         <TableCell>
           <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
             <Stack sx={{ typography: 'body2', flex: '1 1 auto', alignItems: 'flex-start' }}>
-              {row.name}
+              <Link
+                component={RouterLink}
+                href={editHref}
+                color="inherit"
+                sx={{ cursor: 'pointer' }}
+              >
+                {row.name}
+              </Link>
             </Stack>
           </Box>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.teacher.name}</TableCell>
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.duration}</TableCell>
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.level}</TableCell>
-
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.price}</TableCell>
-
-        <TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.courses}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.students}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Tooltip title="تعديل سريع" placement="top" arrow>
               <IconButton

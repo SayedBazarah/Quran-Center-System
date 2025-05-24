@@ -48,18 +48,34 @@ export const navData: NavSectionProps['data'] = [
    * Overview
    */
   {
-    subheader: 'Overview',
+    subheader: 'نظرة عامة',
     items: [
       {
         title: 'المراحل',
         path: paths.dashboard.root,
-        icon: ICONS.dashboard,
+        icon: ICONS.course,
       },
-      { title: 'المعلمين', path: paths.dashboard.two, icon: ICONS.ecommerce },
-      { title: 'الطلاب', path: paths.dashboard.three, icon: ICONS.analytics },
+      { title: 'المعلمين', path: paths.dashboard.teachers, icon: ICONS.external },
+      { title: 'الطلاب', path: paths.dashboard.students, icon: ICONS.user },
+
+      {
+        title: 'الاعدادات',
+        path: paths.dashboard.settings.root,
+        icon: ICONS.dashboard,
+        children: [
+          { title: 'المسنخدمين', path: paths.dashboard.settings.users, icon: ICONS.user },
+          {
+            title: 'امهام والصلاحيات',
+            path: paths.dashboard.settings.roles,
+            icon: ICONS.tour,
+          },
+          {
+            title: 'تغيير كلمة المرور',
+            path: paths.dashboard.settings.changePassword,
+            icon: ICONS.lock,
+          },
+        ],
+      },
     ],
   },
-  /**
-   * Management
-   */
 ];

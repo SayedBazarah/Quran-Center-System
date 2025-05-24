@@ -1,8 +1,9 @@
-import type { ICourseItem } from 'src/types/courses';
+import type { IStudentItem } from 'src/types/student';
 
 import { useBoolean, usePopover } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
@@ -19,26 +20,27 @@ import { Iconify } from 'src/components/iconify';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { CustomPopover } from 'src/components/custom-popover';
 
-import { CourseQuickEditForm } from './course-edit-new-form';
+import { StudentQuickEditForm } from './student-edit-new-form';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  row: ICourseItem;
+  row: IStudentItem;
   selected: boolean;
   editHref: string;
   onSelectRow: () => void;
   onDeleteRow: () => void;
 };
 
-export function CourseTableRow({ row, selected, editHref, onSelectRow, onDeleteRow }: Props) {
+export function StudentTableRow({ row, selected, editHref, onSelectRow, onDeleteRow }: Props) {
   const menuActions = usePopover();
   const confirmDialog = useBoolean();
   const quickEditForm = useBoolean();
 
   const renderQuickEditForm = () => (
-    <CourseQuickEditForm
-      currentCourse={row}
+    <StudentQuickEditForm
+      isNew={false}
+      currentStudent={row}
       open={quickEditForm.value}
       onClose={quickEditForm.onFalse}
     />
@@ -106,16 +108,20 @@ export function CourseTableRow({ row, selected, editHref, onSelectRow, onDeleteR
         <TableCell>
           <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
             <Stack sx={{ typography: 'body2', flex: '1 1 auto', alignItems: 'flex-start' }}>
-              {row.name}
+              <Link
+                component={RouterLink}
+                href={editHref}
+                color="inherit"
+                sx={{ cursor: 'pointer' }}
+              >
+                {row.name}
+              </Link>
             </Stack>
           </Box>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.teacher.name}</TableCell>
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.duration}</TableCell>
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.level}</TableCell>
-
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.price}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.currentCourse}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.courses}</TableCell>
 
         <TableCell>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>

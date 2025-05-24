@@ -4,7 +4,7 @@ import { CoursesListView } from 'src/sections/courses/view/courses-list-view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Dashboard - ${CONFIG.appName}` };
+export const metadata = { title: `لوحة التحكم - ${CONFIG.appName}` };
 
 export default function Page() {
   return <CoursesListView />;
